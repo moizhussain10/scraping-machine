@@ -1,0 +1,430 @@
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #111827;
+}
+::-webkit-scrollbar-thumb {
+  background: #374151;
+  border-radius: 10px;
+}
+
+/* Global Styles */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #111827;
+}
+
+.min-h-screen {
+  color: #f3f4f6;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.max-w-6xl {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #1f2937;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #3b82f6;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Status Badge */
+.status-badge {
+  font-size: 0.75rem;
+  padding: 5px 12px;
+  border-radius: 20px;
+  background: #1f2937;
+  border: 1px solid #374151;
+}
+
+.scanning {
+  background: #064e3b;
+  color: #34d399;
+  border-color: #065f46;
+  animation: pulse 2s infinite;
+}
+
+/* --- USPTO MAIN SEARCH BAR --- */
+.uspto-search-container {
+  margin-bottom: 2.5rem;
+}
+
+.search-bar-main {
+  display: flex;
+  background: #ffffff;
+  border-radius: 8px;
+  height: 55px;
+  overflow: hidden;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.main-filter-select {
+  background: #005ea2; /* USPTO Blue */
+  color: white;
+  border: none;
+  padding: 0 20px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  height: 100%;
+}
+
+.search-input-field {
+  flex: 1;
+  border: none;
+  padding: 0 20px;
+  font-size: 1rem;
+  outline: none;
+  color: #1f2937;
+}
+
+.search-icon-btn {
+  background: #005ea2;
+  color: white;
+  border: none;
+  padding: 0 25px;
+  cursor: pointer;
+}
+
+/* --- ADVANCED BUILDER PANEL --- */
+.advanced-builder-panel {
+  background: #1f2937;
+  margin-top: 15px;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #374151;
+}
+
+.builder-grid {
+  display: flex;
+  gap: 20px;
+  align-items: flex-end; /* Buttons aur Inputs ko bottom se align karne ke liye */
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tag-field { flex: 3; } /* Tag field sabse badi hogi */
+.date-field { flex: 1.5; }
+.btn-wrapper { flex: 0.6; }
+
+.input-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+}
+
+/* Inputs & DatePicker Styling */
+.simple-search-input, .date-input {
+  width: 400px;
+  height: 48px;
+  background: #374151;
+  border: 1px solid #4b5563;
+  border-radius: 8px;
+  padding: 0 15px;
+  color: white;
+  font-size: 0.95rem;
+  outline: none;
+  box-sizing: border-box; /* Padding box ke andar rahe */
+}
+
+.simple-search-input:focus, .date-input:focus {
+  border-color: #3b82f6;
+  background: #4b5563;
+}
+
+.calendar-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.calendar-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+/* Build Button */
+.btn-start {
+  width: 100%;
+  height: 48px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.btn-start:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+/* --- TABLE STYLING --- */
+.table-container {
+  background: #1f2937;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #374151;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background: #111827;
+  text-align: left;
+  padding: 15px;
+  font-size: 0.8rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+}
+
+td {
+  padding: 15px;
+  border-bottom: 1px solid #374151;
+  font-size: 0.9rem;
+}
+
+tbody tr:hover {
+  background: #242f3e;
+}
+
+.empty-row {
+  text-align: center;
+  color: #6b7280;
+  padding: 50px !important;
+}
+
+.serial-link {
+  color: #60a5fa;
+  font-weight: 600;
+}
+
+/* DatePicker Popup Theme Override */
+.react-datepicker {
+  background-color: #1f2937 !important;
+  border: 1px solid #374151 !important;
+  color: white !important;
+}
+.react-datepicker__header {
+  background-color: #111827 !important;
+  border-bottom: 1px solid #374151 !important;
+}
+.react-datepicker__current-month, .react-datepicker__day-name, .react-datepicker__day {
+  color: white !important;
+}
+.react-datepicker__day:hover {
+  background-color: #3b82f6 !important;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+
+:root {
+  --primary: #2563eb;
+  --bg-main: #f8fafc;
+  --glass: rgba(255, 255, 255, 0.95);
+  --border: #e2e8f0;
+  --text-dark: #1e293b;
+  --text-light: #64748b;
+}
+
+.table-container {
+  background: var(--glass);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+  margin-top: 2rem;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* Header Styling */
+thead th {
+  background: #f1f5f9;
+  padding: 18px 24px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Row Styling */
+tbody tr {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+tbody tr:hover {
+  background-color: #f8fafc;
+  transform: translateY(-2px);
+  box-shadow: inset 4px 0 0 var(--primary);
+}
+
+tbody td {
+  padding: 20px 24px;
+  border-bottom: 1px solid #f1f5f9;
+  color: var(--text-dark);
+}
+
+/* Professional Trademark Cell */
+.trademark-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.trademark-name {
+  font-weight: 800;
+  color: #0f172a;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.serial-num {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.75rem;
+  color: var(--primary);
+  background: #eff6ff;
+  padding: 2px 6px;
+  border-radius: 6px;
+  width: fit-content;
+  margin-top: 4px;
+}
+
+/* Owner Section */
+.owner-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.owner-avatar {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+/* Modern Contact Pill */
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid var(--border);
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+  color: var(--text-dark);
+  transition: 0.2s;
+}
+
+.contact-item:hover {
+  border-color: var(--primary);
+  background: #eff6ff;
+}
+
+.contact-item svg {
+  color: var(--primary);
+}
+
+/* Action Button: Rounded & Pulsing */
+.view-btn {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  color: var(--text-light);
+  transition: all 0.2s;
+}
+
+.view-btn:hover {
+  background: var(--primary);
+  color: white;
+  transform: rotate(15deg);
+}
+
+/* Header ko flex-row banane ke liye */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+/* Clear Button Styling */
+.clear-btn {
+  background: #fff1f2;
+  color: #e11d48;
+  border: 1px solid #fecaca;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.clear-btn:hover {
+  background: #e11d48;
+  color: white;
+  border-color: #e11d48;
+  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.2);
+}
