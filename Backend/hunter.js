@@ -281,12 +281,21 @@ async function verifyStatus(browser, lead, mainPage) {
 
                             process.stdout.write(`🎯 FOUND: ${res.owner} | 📞 ${res.phone} `);
 
-                            if (global.io) {
-                                global.io.emit('new-lead', {
-                                    markName: lead.markName,
-                                    serial: lead.serial,
-                                    owners: lead.owners // Pura array bhej rahe hain jo tumne upar dikhaya
-                                });
+                            // hunter.js mein jahan lead milti hai:
+                            if (Array.isArray(resultsArray) && resultsArray.length > 0) {
+                                for (const res of resultsArray) {
+                                    if (res.phone !== "N/A") {
+                                        // Socket emit ki jagah ye function call karo:
+                                        global.addLead({
+                                            markName: lead.markName,
+                                            serial: lead.serial,
+                                            owner: res.owner,
+                                            email: res.email,
+                                            phone: res.phone,
+                                            status: "Dead"
+                                        });
+                                    }
+                                }
                             }
 
                             // 🚀 --- CSV SAVING LOGIC START ---
