@@ -284,11 +284,8 @@ async function verifyStatus(browser, lead, mainPage) {
                             if (global.io) {
                                 global.io.emit('new-lead', {
                                     markName: lead.markName,
-                                    serialNum: lead.serial,
-                                    owner: res.owner,
-                                    email: res.email,
-                                    phone: res.phone,
-                                    status: "Dead"
+                                    serial: lead.serial,
+                                    owners: lead.owners // Pura array bhej rahe hain jo tumne upar dikhaya
                                 });
                             }
 
