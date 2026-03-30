@@ -96,40 +96,27 @@ function App() {
   }, [leads]);
 
   useEffect(() => {
-    const socket = io('http://localhost:5000');
+    let interval;
 
-    socket.on('new-lead', (data) => {
-      // Check karo ke data sahi hai aur owners ka array mojud hai
-      if (data && data.owners && Array.isArray(data.owners)) {
-
-        // Yahan loop chala kar har owner ki alag entry bana rahe hain
-        const formattedEntries = data.owners.map(o => ({
-          markName: data.markName || "N/A",
-          serialNum: data.serial || "N/A",
-          owner: o.owner || "N/A",
-          phone: o.phone || "N/A",
-          email: o.email || "N/A",
-          status: "Dead"
-        }));
-
-        // Ab leads state mein saare owners ko ek sath bhej do
-        setLeads((prevLeads) => {
-          // Sirf wo entries add karo jo list mein pehle se nahi hain
-          const newOnes = formattedEntries.filter(entry =>
-            !prevLeads.some(p => p.serialNum === entry.serialNum && p.owner === entry.owner)
-          );
-          return [...newOnes, ...prevLeads];
-        });
+    const fetchLeads = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/leads');
+        if (response.ok) {
+          const data = await response.json();
+          // Backend se array aa raha hai, direct set kar do
+          setLeads(data);
+        }
+      } catch (err) {
+        console.error("Polling Error: Backend shayad band hai.", err);
       }
-    });
+    };
 
-    socket.on('scanning-stopped', () => {
-      setIsScanning(false);
-    });
+    // Agar scanning on hai tabhi polling chalao (Optional optimization)
+    // Ya phir hamesha chalne do taake data sync rahe
+    interval = setInterval(fetchLeads, 3000);
 
-    return () => socket.disconnect();
+    return () => clearInterval(interval); // Cleanup
   }, []);
-
 
   const inputType = useMemo(() => {
     if (DATE_TAGS.includes(selectedTag.value)) return 'date';
@@ -178,25 +165,22 @@ function App() {
   };
 
   const handleFinalSearch = async () => {
-    setLeads([]);
+    setLeads([]); // Purana data clear karein
     setIsScanning(true);
 
     try {
-      await fetch('http://localhost:5000/api/search', {
+      const response = await fetch('http://localhost:5000/api/search', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: mainSearchValue })
       });
+
+      if (!response.ok) throw new Error("Search failed");
+
     } catch (err) {
       setIsScanning(false);
       console.error("Backend se connect nahi ho paya", err);
-    }
-  };
-
-  const handleClearLeads = () => {
-    if (window.confirm("Saara data delete kar dein?")) {
-      setLeads([]);
-      localStorage.removeItem('uspto_leads');
+      alert("Server nahi chal raha!");
     }
   };
 
